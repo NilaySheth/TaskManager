@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="backgroundPrimary">#E0EFFF</color>
+    <color name="backgroundSecondary">#C1DCFB</color>
+
+    <color name="textPrimary">#021327</color>
+    <color name="textSecondary">#45515F</color>
+
+    <color name="colorAccent">@color/textPrimary</color>
+
+    <color name="errorPrimary">#F85C5C</color>
+
+    <color name="strokeColor">@color/textSecondary</color>
+    <color name="strokeColor2">@color/textPrimary</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

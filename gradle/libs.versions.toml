@@ -1,5 +1,6 @@
 [versions]
 agp = "8.5.0-alpha05"
+coreSplashscreen = "1.0.0-beta02"
 firebaseBom = "33.0.0"
 firebaseCrashlyticsGradle = "2.9.9"
 googleServices = "4.4.1"
@@ -19,11 +20,14 @@ navigationFragmentKtx = "2.6.0"
 navigationUiKtx = "2.6.0"
 orbitViewmodel = "4.6.1"
 perfPlugin = "1.4.2"
+playServicesAuth = "21.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
 firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsGradle" }
@@ -43,6 +47,7 @@ androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navi
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 orbit-viewmodel = { module = "org.orbit-mvi:orbit-viewmodel", version.ref = "orbitViewmodel" }
 perf-plugin = { module = "com.google.firebase:perf-plugin", version.ref = "perfPlugin" }
+play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

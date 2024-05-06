@@ -13,20 +13,49 @@ android {
     namespace 'com.taskmanager'
     compileSdk 34
 
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+        buildConfig true
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('taskmanager_android.keystore')
+            storePassword 'taskmanager@android'
+            keyPassword 'taskmanager@android'
+            keyAlias 'taskmanager'
+        }
+    }
+
     defaultConfig {
         applicationId "com.taskmanager"
-        minSdk 24
+        minSdk 28
         targetSdk 34
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", 'google_client_id_android', '"115143608490-bn1sgqeupfmuttcbqifoj8vfn7s5847a.apps.googleusercontent.com"'
     }
 
     buildTypes {
         release {
+            debuggable true
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            firebaseCrashlytics {
+                mappingFileUploadEnabled false
+            }
         }
     }
     compileOptions {
@@ -61,15 +90,21 @@ dependencies {
 
     //Firebase
     implementation platform(libs.firebase.bom)
+    implementation(libs.firebase.auth)
     implementation libs.firebase.analytics.ktx
     implementation libs.firebase.crashlytics.ktx
     implementation(libs.firebase.auth.ktx) {
         exclude module: "play-services-safetynet"
     }
+    implementation( libs.play.services.auth)
 
+    //MVI architecture
     def orbit_mvi_version = "4.6.1"
     //orbit mvi
     api("org.orbit-mvi:orbit-core:$orbit_mvi_version")
     // or, if on Android:
     api(libs.orbit.viewmodel)
+
+    //SplashScreen
+    implementation libs.androidx.core.splashscreen
 }

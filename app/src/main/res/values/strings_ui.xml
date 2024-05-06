@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_google">Sign in with Google</string>
+
+    <string name="create_task_menu_create">CREATE</string>
+</resources>

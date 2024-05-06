@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Text" parent="Widget.Design.TextInputLayout">
+        <item name="fontFamily">@font/inter_font_family</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="TextHeader1" parent="Text">
+        <item name="android:textFontWeight">@integer/font_weight_700</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/sp_22</item>
+    </style>
+
+    <style name="TextHeader2" parent="Text">
+        <item name="android:textFontWeight">@integer/font_weight_700</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/sp_20</item>
+    </style>
+
+    <style name="TextHeader3" parent="Text">
+        <item name="android:textFontWeight">@integer/font_weight_700</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+    </style>
+
+    <style name="TextHeader4" parent="Text">
+        <item name="android:textFontWeight">@integer/font_weight_700</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="TextHeader5" parent="Text">
+        <item name="android:textFontWeight">@integer/font_weight_700</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="TextParagraph" parent="Text">
+        <item name="android:textFontWeight">@integer/font_weight_400</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="TextParagraphLarge" parent="Text">
+        <item name="android:textFontWeight">@integer/font_weight_400</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <style name="TextMedium" parent="Text">
+        <item name="android:textFontWeight">@integer/font_weight_600</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="TextBold" parent="Text">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textFontWeight">@integer/font_weight_700</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="TextLinks" parent="Text">
+        <item name="android:textFontWeight">@integer/font_weight_400</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="TextMeta" parent="Text">
+        <item name="android:textFontWeight">@integer/font_weight_400</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="TextMetaBold" parent="Text">
+        <item name="android:textFontWeight">@integer/font_weight_600</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <style name="TextSmallBold" parent="Text">
+        <item name="android:textFontWeight">@integer/font_weight_600</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/sp_10</item>
+    </style>
+
+    <style name="TextSmall" parent="Text">
+        <item name="android:textFontWeight">@integer/font_weight_400</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">@dimen/sp_10</item>
+    </style>
+
+    <style name="HintTextStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/textSecondary</item>
+        <item name="android:textSize">@dimen/sp_10</item>
+    </style>
+
+    <style name="ErrorTextStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/errorPrimary</item>
+    </style>
+
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="hintTextAppearance">@style/HintTextStyle</item>
+        <item name="hintTextColor">@color/textPrimary</item>
+        <item name="errorTextAppearance">@style/ErrorTextStyle</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="hintEnabled">true</item>
+        <item name="hintAnimationEnabled">true</item>
+        <item name="android:textColorHint">@color/textSecondary</item>
+        <item name="colorControlNormal">@color/textPrimary</item>
+        <item name="colorControlActivated">@color/textPrimary</item>
+        <item name="colorControlHighlight">@color/textPrimary</item>
+        <item name="boxStrokeColor">@color/textbox_outline_selector</item>
+        <item name="boxStrokeWidth">@dimen/dp_1</item>
+        <item name="boxStrokeWidthFocused">@dimen/dp_2</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.CutCorners</item>
+    </style>
+
+
+    <style name="ShapeAppearance.App.CutCorners" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">@dimen/dp_2</item>
+    </style>
+</resources>
