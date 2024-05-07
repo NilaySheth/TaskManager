@@ -19,6 +19,7 @@ import com.taskmanager.base.customViews.ItemOffsetDecoration
 import com.taskmanager.base.mvi.MviView
 import com.taskmanager.base.utils.hide
 import com.taskmanager.base.utils.show
+import com.taskmanager.base.utils.timestampToDateFormat
 import com.taskmanager.databinding.FragmentTaskListBinding
 import com.taskmanager.databinding.ItemTaskListBinding
 import com.taskmanager.ui.tasks.list.detail.TaskDetailScreen
@@ -142,6 +143,10 @@ class TaskListFragment : BaseFragment(),
                         ) {
                             binding.tvTitle.text = data.title
                             binding.tvDesc.text = data.desc
+                            binding.tvDate.text = timestampToDateFormat(
+                                data.date.seconds,
+                                "MMMM d, yyyy hh:mm a",
+                            )
                             when (data.status) {
                                 getString(R.string.bs_status_type_todo) -> {
                                     binding.vStatus.setBackgroundColor(

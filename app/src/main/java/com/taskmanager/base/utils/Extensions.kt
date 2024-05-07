@@ -11,6 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.taskmanager.R
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 import java.util.regex.Pattern
 
 
@@ -57,18 +61,11 @@ fun View.noInternetSnack(context: Context, listener: (View) -> Unit) {
     )
 }
 
-fun TextInputEditText.limitDecimalPlaces(maxDecimalPlaces: Int) {
-    filters += InputFilter { source, _, _, dest, dstart, dend ->
-        val value = if (source.isEmpty()) {
-            dest.removeRange(dstart, dend)
-        } else {
-            StringBuilder(dest).insert(dstart, source)
-        }
-        val matcher =
-            Pattern.compile("([1-9][0-9]*)|([1-9][0-9]*\\.[0-9]{0,$maxDecimalPlaces})|(\\.[0-9]{0,$maxDecimalPlaces})")
-                .matcher(value)
-        if (!matcher.matches()) "" else null
-    }
+fun timestampToDateFormat(timeStamp: Long, pattern: String): String {
+    val date = Date(timeStamp * 1000)
+    val sdf = SimpleDateFormat(pattern, Locale.getDefault())
+    sdf.timeZone = TimeZone.getDefault()
+    return sdf.format(date)
 }
 
 fun View.show() {
@@ -77,24 +74,6 @@ fun View.show() {
 
 fun View.hide() {
     this.visibility = View.GONE
-}
-
-fun Activity.hideKeyboard() {
-    try {
-        val inputManager =
-            this.getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
-        if (this.currentFocus != null) {
-            inputManager.hideSoftInputFromWindow(
-                this.currentFocus!!.windowToken, 0
-            )
-        } else {
-            inputManager.hideSoftInputFromWindow(
-                View(this).windowToken, InputMethodManager.HIDE_NOT_ALWAYS
-            )
-        }
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
 }
 
 fun TextInputEditText.getTextFromTiet(): String {

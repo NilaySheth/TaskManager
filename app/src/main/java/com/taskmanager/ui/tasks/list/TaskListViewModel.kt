@@ -52,6 +52,9 @@ constructor(
                                 task.id = result.id
                                 tasksList.add(task)
                             }
+                            tasksList.sortBy {
+                                it.date
+                            }
                         } else {
                             Log.d("Fetch Task List", "No such document")
                         }
@@ -76,7 +79,7 @@ constructor(
 
             }
         }
-        Log.d("Create Task time", "Total time taken: $time ms")
+        Log.d("Fetch Tasks time", "Total time taken: $time ms")
     }
 
     fun fetchTask(task: TasksModel) {
@@ -119,7 +122,7 @@ constructor(
 
             }
         }
-        Log.d("Create Task time", "Total time taken: $time ms")
+        Log.d("Fetch Task time", "Total time taken: $time ms")
     }
 
     fun editTask(tasksModel: TasksModel) {
@@ -128,7 +131,6 @@ constructor(
                 updateViewState(stateReducer = {
                     it.copy(loading = true)
                 })
-
 
                 val db = Firebase.firestore
                 val userTaskDocumentRef =
@@ -143,7 +145,7 @@ constructor(
                     ),
                 )
                     .addOnSuccessListener {
-                        Log.d("TAG", "DocumentSnapshot successfully updated!")
+
                     }
                     .addOnFailureListener { exception ->
                         exception.printStackTrace()
@@ -162,7 +164,7 @@ constructor(
                 }
             }
         }
-        Log.d("Create Task time", "Total time taken: $time ms")
+        Log.d("Edit Task time", "Total time taken: $time ms")
     }
 
     fun deleteTask(tasksModel: TasksModel) {
@@ -178,7 +180,7 @@ constructor(
                         .document(tasksModel.id)
                 userTaskDocumentRef.delete()
                     .addOnSuccessListener {
-                        Log.d("TAG", "DocumentSnapshot successfully deleted!")
+
                     }
                     .addOnFailureListener { exception ->
                         exception.printStackTrace()
@@ -198,7 +200,7 @@ constructor(
 
             }
         }
-        Log.d("Create Task time", "Total time taken: $time ms")
+        Log.d("Delete Task time", "Total time taken: $time ms")
     }
 
     suspend fun <T> Task<T>.await(): T {

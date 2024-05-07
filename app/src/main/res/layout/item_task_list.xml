@@ -34,6 +34,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"
         tools:text="Titlehbhbnjinjn" />
 
+    <TextView
+        android:id="@+id/tvDate"
+        style="@style/TextMeta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:textColor="@color/textDisabled"
+        app:layout_constraintEnd_toStartOf="@+id/vStatus"
+        app:layout_constraintTop_toBottomOf="@+id/tvDesc"
+        tools:text="Titlehbhbnjinjn" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
@@ -41,13 +53,13 @@
         android:background="@color/backgroundSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
     <View
         android:id="@+id/vStatus"
         android:layout_width="@dimen/dp_4"
         app:layout_constraintTop_toTopOf="@+id/tvTitle"
-        app:layout_constraintBottom_toBottomOf="@+id/tvDesc"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDate"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/dp_8"
         android:background="@color/statusDone"
