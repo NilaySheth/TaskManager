@@ -6,7 +6,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.taskmanager.R
 import com.taskmanager.base.BaseActivity
 import com.taskmanager.data.local.prefs.UserPreferences
-import com.taskmanager.ui.tasks.LoginScreenActivity
+import com.taskmanager.ui.tasks.auth.LoginScreen
 import com.taskmanager.ui.tasks.list.TaskListActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,7 +37,7 @@ class RoutingActivity : BaseActivity() {
     }
 
     private fun goToLoginScreen() {
-        Intent(applicationContext, LoginScreenActivity::class.java).apply {
+        Intent(applicationContext, LoginScreen::class.java).apply {
             startActivity(this)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             finish()

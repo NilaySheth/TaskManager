@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomSheetLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rounded_bottomsheet_corners_shape"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_16"
+    android:paddingTop="@dimen/dp_16"
+    android:paddingRight="@dimen/dp_16"
+    android:paddingBottom="@dimen/dp_16">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="@dimen/dp_4"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_4"
+        android:layout_marginBottom="@dimen/dp_4"
+        android:background="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTodo"
+        style="@style/TextParagraph"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:gravity="center|start"
+        android:text="@string/bs_status_type_todo"
+        app:drawableTint="@color/colorAccent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginTop="@dimen/dp_16"
+        android:background="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/tvInProgress"
+        style="@style/TextParagraph"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:gravity="center|start"
+        android:text="@string/bs_status_type_in_progress"
+        app:drawableTint="@color/colorAccent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginTop="@dimen/dp_16"
+        android:background="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/tvDone"
+        style="@style/TextParagraph"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:gravity="center|start"
+        android:text="@string/bs_status_type_done"
+        app:drawableTint="@color/colorAccent" />
+
+
+</LinearLayout>

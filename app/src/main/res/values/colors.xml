@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="backgroundPrimary">#E0EFFF</color>
-    <color name="backgroundSecondary">#C1DCFB</color>
+    <color name="backgroundPrimary">#0A141F</color>
+    <color name="backgroundSecondary">#26374A</color>
 
-    <color name="textPrimary">#021327</color>
-    <color name="textSecondary">#45515F</color>
+    <color name="textPrimary">#FAFAFA</color>
+    <color name="textSecondary">#B6BCC3</color>
 
     <color name="colorAccent">@color/textPrimary</color>
 
-    <color name="errorPrimary">#F85C5C</color>
+    <color name="errorPrimary">#D35850</color>
 
     <color name="strokeColor">@color/textSecondary</color>
     <color name="strokeColor2">@color/textPrimary</color>
 
+    <color name="statusTodo">#45515F</color>
+    <color name="statusInProgress">#568BF5</color>
+    <color name="statusDone">#33A36C</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

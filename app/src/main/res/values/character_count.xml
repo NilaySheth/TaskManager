@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="max_lines_2">2</integer>
+    <integer name="max_lines">5</integer>
+
+    <integer name="max_count_100">100</integer>
+    <integer name="max_count_2500">2500</integer>
+
+    <integer name="name_length">@integer/max_count_100</integer>
+    <integer name="description_length">@integer/max_count_2500</integer>
+
+</resources>

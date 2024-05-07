@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="retry">Retry</string>
+    <string name="validation_no_internet">Unable to connect to Internet, please try again.</string>
+
+    <string name="validation_create_task_title">Please add a title to your task</string>
+    <string name="validation_create_task_desc">Please add a title to description task</string>
+    <string name="validation_create_task_status">Please select a status for your task</string>
+</resources>

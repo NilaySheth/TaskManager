@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="screen_name_create_task">Create Task</string>
+    <string name="screen_name_task_list">Task List</string>
+    <string name="screen_name_login">Login</string>
+
     <string name="login_google">Sign in with Google</string>
 
     <string name="create_task_menu_create">CREATE</string>
+    <string name="create_task_hint_title">Add a title</string>
+    <string name="create_task_hint_desc">Add a description</string>
+    <string name="create_task_hint_status">Select a status</string>
+
+    <string name="bs_status_type_todo">To Do</string>
+    <string name="bs_status_type_in_progress">In Progress</string>
+    <string name="bs_status_type_done">Done</string>
+
 </resources>

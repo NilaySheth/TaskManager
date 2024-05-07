@@ -34,7 +34,14 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.tasks.LoginScreenActivity"
+            android:name=".ui.tasks.auth.LoginScreen"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.tasks.create.CreateTaskScreen"
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
