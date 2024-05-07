@@ -28,7 +28,7 @@ class LoginScreen : BaseActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
 
     companion object {
         fun createIntent(
@@ -55,7 +55,7 @@ class LoginScreen : BaseActivity() {
             .requestEmail()
             .build()
 
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
         binding.mbGoogleSignIn.setOnClickListener {
             signInGoogle()
@@ -63,7 +63,12 @@ class LoginScreen : BaseActivity() {
     }
 
     private fun signInGoogle() {
-        val signInIntent = googleSignInClient.signInIntent
+        try {
+            mGoogleSignInClient.signOut()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        val signInIntent = mGoogleSignInClient.signInIntent
         googleSignInLauncher.launch(signInIntent)
     }
 
