@@ -9,6 +9,7 @@
     <dimen name="sp_10">10sp</dimen>
     <dimen name="sp_8">8sp</dimen>
 
+    <dimen name="dp_96">96dp</dimen>
     <dimen name="dp_48">48dp</dimen>
     <dimen name="dp_24">24dp</dimen>
     <dimen name="dp_16">16dp</dimen>
