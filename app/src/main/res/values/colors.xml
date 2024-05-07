@@ -8,6 +8,7 @@
     <color name="textDisabled">#99A3AE</color>
     <color name="textDecorative">#7C8998</color>
     <color name="textRare">#DEE0E3</color>
+    <color name="inverseTextPrimary">#021327</color>
 
     <color name="colorAccent">@color/textPrimary</color>
 

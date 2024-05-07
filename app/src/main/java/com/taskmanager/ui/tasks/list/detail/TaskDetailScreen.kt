@@ -13,6 +13,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.taskmanager.R
 import com.taskmanager.base.BaseActivity
@@ -118,7 +119,7 @@ class TaskDetailScreen : BaseActivity(),
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_edit -> goToEditTaskScreen()
-            R.id.action_delete -> deleteTask()
+            R.id.action_delete -> openBSToDeleteTask(this@TaskDetailScreen)
         }
         return true
     }
@@ -188,6 +189,32 @@ class TaskDetailScreen : BaseActivity(),
         }
 
         typePickerDialog.show()
+    }
+
+    fun openBSToDeleteTask(
+        context: Context
+    ) {
+        val confirmationPickerDialog = BaseBottomSheetDialog(context)
+        confirmationPickerDialog.setContentView(R.layout.bs_confirmation)
+        val tvTitle = confirmationPickerDialog.findViewById<TextView>(R.id.tvTitle)!!
+        val tvNegative =
+            confirmationPickerDialog.findViewById<MaterialButton>(R.id.tvNegative)!!
+        val tvPositive =
+            confirmationPickerDialog.findViewById<MaterialButton>(R.id.tvPositive)!!
+
+        tvTitle.text = context.getString(R.string.confirmation_task_delete_title)
+
+        tvPositive.text = context.getString(R.string.confirmation_task_delete_positive)
+        tvNegative.text = context.getString(R.string.confirmation_task_delete_negative)
+
+        tvNegative.setOnClickListener {
+            confirmationPickerDialog.dismiss()
+        }
+        tvPositive.setOnClickListener {
+            deleteTask()
+            confirmationPickerDialog.dismiss()
+        }
+        confirmationPickerDialog.show()
     }
 
     override fun handleViewState(state: TaskListViewState) {

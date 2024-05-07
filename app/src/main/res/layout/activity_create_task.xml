@@ -62,10 +62,10 @@
             android:layout_height="wrap_content"
             android:gravity="start"
             android:hint="@string/create_task_hint_desc"
-            android:inputType="textMultiLine"
+            android:inputType="textCapSentences|textMultiLine"
             android:lines="5"
-            android:maxLines="10"
-            android:minLines="8"
+            android:maxLines="15"
+            android:minLines="12"
             android:textColorHint="@color/textSecondary" />
 
     </com.google.android.material.textfield.TextInputLayout>

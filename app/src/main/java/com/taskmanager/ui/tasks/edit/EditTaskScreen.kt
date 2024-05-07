@@ -205,7 +205,7 @@ class EditTaskScreen : BaseActivity(),
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_edit -> validateAndEditTask()
+            R.id.action_save -> validateAndEditTask()
         }
         return true
     }
