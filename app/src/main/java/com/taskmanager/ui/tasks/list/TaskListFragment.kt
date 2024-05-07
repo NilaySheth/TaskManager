@@ -73,11 +73,11 @@ class TaskListFragment : BaseFragment(),
     override fun handleSingleViewEvent(event: TaskListSingleViewEvent) {
         when (event) {
             is TaskListSingleViewEvent.TasksFetchedSuccessfully -> {
+                tasksList.clear()
+                tasksList.addAll(event.taskList)
                 if (binding.rvTaskList.adapter == null) {
-                    tasksList.clear()
-                    tasksList.addAll(event.taskList)
                     setupAdapter(
-                        tasksList,
+                        event.taskList,
                     )
                 } else {
                     (binding.rvTaskList.adapter as GenericAdapter<TasksModel, ItemTaskListBinding>).updateList(
@@ -197,30 +197,38 @@ class TaskListFragment : BaseFragment(),
         val tvDone: TextView = typePickerDialog.findViewById(R.id.tvDone)!!
 
         tvAll.setOnClickListener {
-            taskListViewModel.getFilterByTasksStatus(
-                tasksList,
-                getString(R.string.bs_status_type_all)
+            (binding.rvTaskList.adapter as GenericAdapter<TasksModel, ItemTaskListBinding>).updateList(
+                taskListViewModel.getFilterByTasksStatus(
+                    tasksList,
+                    getString(R.string.bs_status_type_all)
+                )
             )
             typePickerDialog.dismiss()
         }
         tvTodo.setOnClickListener {
-            taskListViewModel.getFilterByTasksStatus(
-                tasksList,
-                getString(R.string.bs_status_type_todo)
+            (binding.rvTaskList.adapter as GenericAdapter<TasksModel, ItemTaskListBinding>).updateList(
+                taskListViewModel.getFilterByTasksStatus(
+                    tasksList,
+                    getString(R.string.bs_status_type_todo)
+                )
             )
             typePickerDialog.dismiss()
         }
         tvInProgress.setOnClickListener {
-            taskListViewModel.getFilterByTasksStatus(
-                tasksList,
-                getString(R.string.bs_status_type_in_progress)
+            (binding.rvTaskList.adapter as GenericAdapter<TasksModel, ItemTaskListBinding>).updateList(
+                taskListViewModel.getFilterByTasksStatus(
+                    tasksList,
+                    getString(R.string.bs_status_type_in_progress)
+                )
             )
             typePickerDialog.dismiss()
         }
         tvDone.setOnClickListener {
-            taskListViewModel.getFilterByTasksStatus(
-                tasksList,
-                getString(R.string.bs_status_type_done)
+            (binding.rvTaskList.adapter as GenericAdapter<TasksModel, ItemTaskListBinding>).updateList(
+                taskListViewModel.getFilterByTasksStatus(
+                    tasksList,
+                    getString(R.string.bs_status_type_done)
+                )
             )
             typePickerDialog.dismiss()
         }
