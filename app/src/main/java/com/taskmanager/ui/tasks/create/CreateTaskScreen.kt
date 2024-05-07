@@ -159,15 +159,6 @@ class CreateTaskScreen : BaseActivity(),
         return true
     }
 
-    private fun handleBackPress() {
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                finish()
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-            }
-        })
-    }
-
     override fun handleViewState(state: CreateTaskViewState) {
         if (state.loading) {
             binding.progressBar.root.show()
@@ -186,5 +177,14 @@ class CreateTaskScreen : BaseActivity(),
                 this@CreateTaskScreen.onBackPressedDispatcher.onBackPressed()
             }
         }
+    }
+
+    private fun handleBackPress() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finish()
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            }
+        })
     }
 }

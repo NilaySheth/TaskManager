@@ -2,6 +2,7 @@
 <resources>
     <integer name="max_lines_2">2</integer>
     <integer name="max_lines">5</integer>
+    <integer name="max_lines_25">25</integer>
 
     <integer name="max_count_100">100</integer>
     <integer name="max_count_2500">2500</integer>

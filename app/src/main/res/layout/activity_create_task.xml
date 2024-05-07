@@ -22,9 +22,9 @@
         style="@style/TextInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginStart="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_16"
-        android:layout_marginEnd="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_16"
         app:counterTextColor="@color/textPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,9 +48,9 @@
         style="@style/TextInputLayoutStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginStart="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_16"
-        android:layout_marginEnd="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilTitle">
@@ -64,8 +64,8 @@
             android:hint="@string/create_task_hint_desc"
             android:inputType="textMultiLine"
             android:lines="5"
-            android:maxLines="5"
-            android:minLines="3"
+            android:maxLines="10"
+            android:minLines="8"
             android:textColorHint="@color/textSecondary" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_12"
         android:layout_marginTop="@dimen/dp_16"
-        android:layout_marginEnd="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_16"
         app:cardBackgroundColor="@color/backgroundSecondary"
         app:cardCornerRadius="@dimen/dp_16"
         app:cardElevation="@dimen/dp_8"

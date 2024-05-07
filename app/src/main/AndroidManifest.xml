@@ -27,13 +27,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.tasks.list.TaskListActivity"
-            android:exported="true"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".ui.tasks.auth.LoginScreen"
             android:exported="true"
             android:launchMode="singleTop"
@@ -42,6 +35,20 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.tasks.create.CreateTaskScreen"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.tasks.list.TaskListScreen"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.tasks.list.detail.TaskDetailScreen"
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"

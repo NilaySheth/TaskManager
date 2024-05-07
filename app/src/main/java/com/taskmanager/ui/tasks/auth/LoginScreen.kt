@@ -20,7 +20,7 @@ import com.taskmanager.base.BaseActivity
 import com.taskmanager.base.utils.showToast
 import com.taskmanager.data.local.prefs.UserPreferences
 import com.taskmanager.databinding.ActivityLoginBinding
-import com.taskmanager.ui.tasks.list.TaskListActivity
+import com.taskmanager.ui.tasks.list.TaskListScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -70,7 +70,6 @@ class LoginScreen : BaseActivity() {
     private val googleSignInLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 handleResults(task)
             }
@@ -103,7 +102,7 @@ class LoginScreen : BaseActivity() {
     }
 
     private fun goToTaskListScreen() {
-        TaskListActivity.createIntent(applicationContext).apply {
+        TaskListScreen.createIntent(applicationContext).apply {
             startActivity(this)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             finish()

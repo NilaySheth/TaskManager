@@ -7,7 +7,7 @@ import com.google.firebase.ktx.Firebase
 import com.taskmanager.R
 import com.taskmanager.base.BaseActivity
 import com.taskmanager.ui.tasks.auth.LoginScreen
-import com.taskmanager.ui.tasks.list.TaskListActivity
+import com.taskmanager.ui.tasks.list.TaskListScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,7 +29,7 @@ class RoutingActivity : BaseActivity() {
     }
 
     private fun goToTaskListScreen() {
-        TaskListActivity.createIntent(applicationContext).apply {
+        TaskListScreen.createIntent(applicationContext).apply {
             startActivity(this)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             finish()
