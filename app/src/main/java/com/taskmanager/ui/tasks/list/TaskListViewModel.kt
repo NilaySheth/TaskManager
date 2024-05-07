@@ -228,9 +228,6 @@ constructor(
         selectedFilterType: String
     ) {
         viewModelScope.launch(Dispatchers.IO) {
-            updateViewState(stateReducer = {
-                it.copy(loading = true)
-            })
             val filteredList = if (selectedFilterType == "All") {
                 dataList
             } else {
@@ -242,12 +239,6 @@ constructor(
                 }
                 filteredList
             }
-
-            updateViewState(stateReducer = {
-                it.copy(
-                    loading = false,
-                )
-            })
             withContext(Dispatchers.Main) {
                 postSingleViewEvent(
                     TaskListSingleViewEvent.TasksFetchedSuccessfully(
