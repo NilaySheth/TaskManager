@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.tasks.Task
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.taskmanager.base.mvi.MviViewModel
@@ -13,6 +14,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Date
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -46,11 +48,12 @@ constructor(
                     .addOnSuccessListener { results ->
                         if (results != null) {
                             results.forEach { result ->
-                                tasksList.add(result.toObject(TasksModel::class.java))
+                                val task = result.toObject(TasksModel::class.java)
+                                task.id = result.id
+                                tasksList.add(task)
                             }
-                            Log.d("TAG", "DocumentSnapshot data: ${results.documents}")
                         } else {
-                            Log.d("TAG", "No such document")
+                            Log.d("Fetch Task List", "No such document")
                         }
                     }
                     .addOnFailureListener { exception ->
@@ -68,6 +71,128 @@ constructor(
                         TaskListSingleViewEvent.TasksFetchedSuccessfully(
                             tasksList
                         )
+                    )
+                }
+
+            }
+        }
+        Log.d("Create Task time", "Total time taken: $time ms")
+    }
+
+    fun fetchTask(task: TasksModel) {
+        val time = measureTimeMillis {
+            viewModelScope.launch(Dispatchers.IO) {
+                updateViewState(stateReducer = {
+                    it.copy(loading = true)
+                })
+
+                val db = Firebase.firestore
+                val userTaskDocumentRef =
+                    db.collection("tasks").document("users").collection(UserPreferences.userId)
+                        .document(task.id)
+                userTaskDocumentRef.get()
+                    .addOnSuccessListener { result ->
+                        result.data.apply {
+                            task.title = this?.get("title").toString()
+                            task.desc = this?.get("desc").toString()
+                            task.status = this?.get("status").toString()
+                        }
+                        task.id = result.id
+                    }
+                    .addOnFailureListener { exception ->
+                        exception.printStackTrace()
+                    }
+                    .await()
+
+                updateViewState(stateReducer = {
+                    it.copy(
+                        loading = false,
+                    )
+                })
+                withContext(Dispatchers.Main) {
+                    postSingleViewEvent(
+                        TaskListSingleViewEvent.TaskFetchedSuccessfully(
+                            task
+                        )
+                    )
+                }
+
+            }
+        }
+        Log.d("Create Task time", "Total time taken: $time ms")
+    }
+
+    fun editTask(tasksModel: TasksModel) {
+        val time = measureTimeMillis {
+            viewModelScope.launch(Dispatchers.IO) {
+                updateViewState(stateReducer = {
+                    it.copy(loading = true)
+                })
+
+
+                val db = Firebase.firestore
+                val userTaskDocumentRef =
+                    db.collection("tasks").document("users").collection(UserPreferences.userId)
+                        .document(tasksModel.id)
+                userTaskDocumentRef.update(
+                    mapOf(
+                        "title" to tasksModel.title,
+                        "desc" to tasksModel.desc,
+                        "status" to tasksModel.status,
+                        "date" to Timestamp(Date()),
+                    ),
+                )
+                    .addOnSuccessListener {
+                        Log.d("TAG", "DocumentSnapshot successfully updated!")
+                    }
+                    .addOnFailureListener { exception ->
+                        exception.printStackTrace()
+                    }
+                    .await()
+
+                updateViewState(stateReducer = {
+                    it.copy(
+                        loading = false,
+                    )
+                })
+                withContext(Dispatchers.Main) {
+                    postSingleViewEvent(
+                        TaskListSingleViewEvent.TaskEditedSuccessfully
+                    )
+                }
+            }
+        }
+        Log.d("Create Task time", "Total time taken: $time ms")
+    }
+
+    fun deleteTask(tasksModel: TasksModel) {
+        val time = measureTimeMillis {
+            viewModelScope.launch(Dispatchers.IO) {
+                updateViewState(stateReducer = {
+                    it.copy(loading = true)
+                })
+
+                val db = Firebase.firestore
+                val userTaskDocumentRef =
+                    db.collection("tasks").document("users").collection(UserPreferences.userId)
+                        .document(tasksModel.id)
+                userTaskDocumentRef.delete()
+                    .addOnSuccessListener {
+                        Log.d("TAG", "DocumentSnapshot successfully deleted!")
+                    }
+                    .addOnFailureListener { exception ->
+                        exception.printStackTrace()
+                    }
+                    .await()
+
+                updateViewState(stateReducer = {
+                    it.copy(
+                        loading = false,
+                    )
+                })
+                withContext(Dispatchers.Main) {
+                    postSingleViewEvent(
+                        TaskListSingleViewEvent.TaskDeleteSuccessfully
                     )
                 }
 

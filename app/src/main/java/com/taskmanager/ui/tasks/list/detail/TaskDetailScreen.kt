@@ -1,6 +1,7 @@
 package com.taskmanager.ui.tasks.list.detail
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,16 +9,20 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import com.taskmanager.R
 import com.taskmanager.base.BaseActivity
 import com.taskmanager.base.BaseBottomSheetDialog
 import com.taskmanager.base.mvi.MviView
 import com.taskmanager.base.utils.hide
 import com.taskmanager.base.utils.show
+import com.taskmanager.base.utils.showToast
 import com.taskmanager.databinding.ActivityTaskDetailBinding
-import com.taskmanager.ui.tasks.create.CreateTaskScreen
+import com.taskmanager.ui.tasks.edit.EditTaskScreen
 import com.taskmanager.ui.tasks.list.TaskListSingleViewEvent
 import com.taskmanager.ui.tasks.list.TaskListViewModel
 import com.taskmanager.ui.tasks.list.TaskListViewState
@@ -50,14 +55,13 @@ class TaskDetailScreen : BaseActivity(),
 
     private fun setupUI() {
         setupToolbarMenu()
-        setDataFromIntent()
+        intent.getParcelableExtra<TasksModel>("taskModel")?.let { updateTaskDetailData(it) }
         binding.mcvStatus.setOnClickListener {
             openBSToSelectStatus(this@TaskDetailScreen)
         }
     }
 
-    private fun setDataFromIntent() {
-        val task = intent.getParcelableExtra<TasksModel>("taskModel")
+    private fun updateTaskDetailData(task: TasksModel) {
         task?.let {
             taskDetailViewModel.setTaskModel(it)
             binding.tvTitle.text = task.title
@@ -120,11 +124,13 @@ class TaskDetailScreen : BaseActivity(),
     }
 
     private fun deleteTask() {
-
+        taskDetailViewModel.getTaskModel()?.let {
+            taskDetailViewModel.deleteTask(it)
+        }
     }
 
     private fun updateTask(task: TasksModel) {
-
+        taskDetailViewModel.editTask(task)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -197,12 +203,48 @@ class TaskDetailScreen : BaseActivity(),
             is TaskListSingleViewEvent.TasksFetchedSuccessfully -> {
 
             }
+
+            TaskListSingleViewEvent.TaskDeleteSuccessfully -> {
+                showToast(
+                    getString(R.string.delete_task_success),
+                    Snackbar.LENGTH_LONG
+                )
+                this@TaskDetailScreen.onBackPressedDispatcher.onBackPressed()
+            }
+
+            TaskListSingleViewEvent.TaskEditedSuccessfully -> {
+                showToast(
+                    getString(R.string.edit_task_success),
+                    Snackbar.LENGTH_LONG
+                )
+            }
+
+            is TaskListSingleViewEvent.TaskFetchedSuccessfully -> {
+                updateTaskDetailData(event.task)
+            }
         }
     }
 
+    private val EditTaskResponseLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.let {
+                    if (it.component?.packageName == applicationContext.packageName) {
+                        if (it.getBooleanExtra("Edited", false)) {
+                            taskDetailViewModel.getTaskModel()?.let {
+                                taskDetailViewModel.fetchTask(it)
+                            }
+                        }
+                    }
+                }
+            } else if (result.resultCode == Activity.RESULT_CANCELED) {
+                // TODO Email cancel
+            }
+        }
+
     private fun goToEditTaskScreen() {
-        CreateTaskScreen.createIntent(applicationContext).apply {
-            startActivity(this)
+        EditTaskScreen.createIntent(applicationContext, taskDetailViewModel.getTaskModel()).apply {
+            EditTaskResponseLauncher.launch(this)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
     }

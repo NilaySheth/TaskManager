@@ -12,8 +12,10 @@
         <item name="android:colorBackground">@color/backgroundPrimary</item>
         <item name="colorOnBackground">@color/backgroundPrimary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/backgroundPrimary</item>
+        <item name="android:statusBarColor">@color/backgroundPrimary</item>
         <item name="android:windowLightStatusBar">true</item>
+
+        <item name="android:colorAccent">@color/colorAccent</item>
         <!-- Customize your theme here. -->
         <item name="android:windowDisablePreview">true</item>
 

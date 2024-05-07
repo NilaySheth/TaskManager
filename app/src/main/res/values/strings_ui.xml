@@ -3,6 +3,7 @@
     <string name="screen_name_create_task">Create Task</string>
     <string name="screen_name_task_list">Task List</string>
     <string name="screen_name_login">Login</string>
+    <string name="screen_name_edit_task">Edit Task</string>
 
     <string name="login_google">Sign in with Google</string>
 
@@ -10,7 +11,6 @@
     <string name="create_task_hint_title">Add a title</string>
     <string name="create_task_hint_desc">Add a description</string>
     <string name="create_task_hint_status">Select a status</string>
-    <string name="create_task_success">Kudos! Task created successfully.</string>
 
     <string name="task_list_menu_logout">Logout</string>
     <string name="task_list_empty_message">No tasks found.</string>
@@ -21,8 +21,14 @@
     <string name="task_detail_title_desc">Description</string>
     <string name="task_detail_title_status">Status</string>
 
+    <string name="edit_task_menu_save">Save</string>
+
     <string name="bs_status_type_todo">To Do</string>
     <string name="bs_status_type_in_progress">In Progress</string>
     <string name="bs_status_type_done">Done</string>
+
+    <string name="create_task_success">Kudos! Task created successfully.</string>
+    <string name="edit_task_success">Task edited successfully.</string>
+    <string name="delete_task_success">Task deleted successfully.</string>
 
 </resources>

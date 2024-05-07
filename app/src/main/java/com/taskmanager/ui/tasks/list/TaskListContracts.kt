@@ -9,4 +9,7 @@ data class TaskListViewState(
 
 sealed interface TaskListSingleViewEvent : SingleViewEvent {
     data class TasksFetchedSuccessfully(val taskList: ArrayList<TasksModel>) : TaskListSingleViewEvent
+    data class TaskFetchedSuccessfully(val task: TasksModel) : TaskListSingleViewEvent
+    object TaskDeleteSuccessfully : TaskListSingleViewEvent
+    object TaskEditedSuccessfully : TaskListSingleViewEvent
 }

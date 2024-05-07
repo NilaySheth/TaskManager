@@ -5,14 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/backgroundPrimary"
-    android:padding="@dimen/dp_8">
+    android:paddingStart="@dimen/dp_8"
+    android:paddingTop="@dimen/dp_8"
+    android:paddingBottom="@dimen/dp_8">
 
     <TextView
         android:id="@+id/tvTitle"
         style="@style/TextHeader4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_8"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/vStatus"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Titlehbhbnjinjn j  ji jijio ji ds s  ad sfsf dg dg w Titlehbhbnjinjn j  ji jijio ji ds s  ad sfsf dg dg " />
@@ -20,13 +24,15 @@
     <TextView
         android:id="@+id/tvDesc"
         style="@style/TextParagraph"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginEnd="@dimen/dp_8"
         android:maxLines="@integer/max_lines"
+        app:layout_constraintEnd_toStartOf="@+id/vStatus"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        tools:text="Titlehbhbnjinjn j  ji jijio ji ds s  ad sfsf dg dg w Titlehbhbnjinjn j  ji jijio ji ds s  ad sfsf dg dg  Titlehbhbnjinjn j  ji jijio ji ds s  ad sfsf dg dg w Titlehbhbnjinjn j  ji jijio ji ds s  ad sfsf dg dg  Titlehbhbnjinjn j  ji jijio ji ds s  ad sfsf dg dg w Titlehbhbnjinjn j  ji jijio ji ds s  ad sfsf dg dg " />
+        tools:text="Titlehbhbnjinjn" />
 
     <View
         android:layout_width="match_parent"
@@ -36,4 +42,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDesc" />
+
+    <View
+        android:id="@+id/vStatus"
+        android:layout_width="@dimen/dp_4"
+        app:layout_constraintTop_toTopOf="@+id/tvTitle"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDesc"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/dp_8"
+        android:background="@color/statusDone"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,8 +45,13 @@ class TaskListFragment : BaseFragment(),
         return binding.root
     }
 
-    private fun setupUI() {
+    override fun onResume() {
+        super.onResume()
         taskListViewModel.fetchTaskList()
+    }
+
+    private fun setupUI() {
+
     }
 
     override fun handleViewState(state: TaskListViewState) {
@@ -69,6 +75,18 @@ class TaskListFragment : BaseFragment(),
                     )
                 }
                 event.taskList
+            }
+
+            TaskListSingleViewEvent.TaskDeleteSuccessfully -> {
+                //Not used in this screen
+            }
+
+            TaskListSingleViewEvent.TaskEditedSuccessfully -> {
+
+            }
+
+            is TaskListSingleViewEvent.TaskFetchedSuccessfully -> {
+
             }
         }
     }
@@ -116,6 +134,34 @@ class TaskListFragment : BaseFragment(),
                         ) {
                             binding.tvTitle.text = data.title
                             binding.tvDesc.text = data.desc
+                            when (data.status) {
+                                getString(R.string.bs_status_type_todo) -> {
+                                    binding.vStatus.setBackgroundColor(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color.statusTodo
+                                        )
+                                    )
+                                }
+
+                                getString(R.string.bs_status_type_in_progress) -> {
+                                    binding.vStatus.setBackgroundColor(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color.statusInProgress
+                                        )
+                                    )
+                                }
+
+                                getString(R.string.bs_status_type_done) -> {
+                                    binding.vStatus.setBackgroundColor(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color.statusDone
+                                        )
+                                    )
+                                }
+                            }
                             binding.root.setOnClickListener {
                                 callback?.invoke(data, position)
                             }

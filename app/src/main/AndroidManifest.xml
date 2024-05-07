@@ -41,6 +41,13 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".ui.tasks.edit.EditTaskScreen"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".ui.tasks.list.TaskListScreen"
             android:exported="true"
             android:launchMode="singleTop"
