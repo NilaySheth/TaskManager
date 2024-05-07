@@ -13,6 +13,8 @@
     <string name="create_task_hint_status">Select a status</string>
 
     <string name="task_list_menu_logout">Logout</string>
+    <string name="task_list_menu_add">Add</string>
+    <string name="task_list_menu_filter">Filter</string>
     <string name="task_list_empty_message">No tasks found.</string>
 
     <string name="task_detail_menu_edit">Edit</string>
@@ -23,6 +25,7 @@
 
     <string name="edit_task_menu_save">Save</string>
 
+    <string name="bs_status_type_all">All</string>
     <string name="bs_status_type_todo">To Do</string>
     <string name="bs_status_type_in_progress">In Progress</string>
     <string name="bs_status_type_done">Done</string>

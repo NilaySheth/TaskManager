@@ -222,4 +222,39 @@ constructor(
     fun getTaskModel(): TasksModel? {
         return taskModel
     }
+
+    fun getFilterByTasksStatus(
+        dataList: ArrayList<TasksModel>,
+        selectedFilterType: String
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            updateViewState(stateReducer = {
+                it.copy(loading = true)
+            })
+            val filteredList = if (selectedFilterType == "All") {
+                dataList
+            } else {
+                val filteredList = arrayListOf<TasksModel>()
+                dataList.forEach { data ->
+                    if (data.status == selectedFilterType) {
+                        filteredList.add(data)
+                    }
+                }
+                filteredList
+            }
+
+            updateViewState(stateReducer = {
+                it.copy(
+                    loading = false,
+                )
+            })
+            withContext(Dispatchers.Main) {
+                postSingleViewEvent(
+                    TaskListSingleViewEvent.TasksFetchedSuccessfully(
+                        filteredList
+                    )
+                )
+            }
+        }
+    }
 }

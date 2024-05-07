@@ -45,6 +45,18 @@
             android:text="@string/task_list_empty_message" />
     </LinearLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabFilterBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_24"
+        android:contentDescription="@string/app_name"
+        app:backgroundTint="@color/backgroundSecondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_filter_by" />
+
     <include
         android:id="@+id/progressBar"
         layout="@layout/layout_progress_bar" />

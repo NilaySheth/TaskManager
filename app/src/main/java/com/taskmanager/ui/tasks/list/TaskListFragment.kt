@@ -1,14 +1,18 @@
 package com.taskmanager.ui.tasks.list
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.taskmanager.R
+import com.taskmanager.base.BaseBottomSheetDialog
 import com.taskmanager.base.BaseFragment
 import com.taskmanager.base.customViews.GenericAdapter
 import com.taskmanager.base.customViews.ItemOffsetDecoration
@@ -26,6 +30,7 @@ class TaskListFragment : BaseFragment(),
 
     private lateinit var binding: FragmentTaskListBinding
     private val taskListViewModel by viewModels<TaskListViewModel>()
+    private val tasksList: ArrayList<TasksModel> = arrayListOf()
 
     companion object {
         fun getInstance(): Fragment {
@@ -51,7 +56,9 @@ class TaskListFragment : BaseFragment(),
     }
 
     private fun setupUI() {
-
+        binding.fabFilterBy.setOnClickListener { view ->
+            openBSToFilterTasks(requireActivity())
+        }
     }
 
     override fun handleViewState(state: TaskListViewState) {
@@ -66,15 +73,16 @@ class TaskListFragment : BaseFragment(),
         when (event) {
             is TaskListSingleViewEvent.TasksFetchedSuccessfully -> {
                 if (binding.rvTaskList.adapter == null) {
+                    tasksList.clear()
+                    tasksList.addAll(event.taskList)
                     setupAdapter(
-                        event.taskList,
+                        tasksList,
                     )
                 } else {
                     (binding.rvTaskList.adapter as GenericAdapter<TasksModel, ItemTaskListBinding>).updateList(
                         event.taskList,
                     )
                 }
-                event.taskList
             }
 
             TaskListSingleViewEvent.TaskDeleteSuccessfully -> {
@@ -173,6 +181,48 @@ class TaskListFragment : BaseFragment(),
                 )
         }
     }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun openBSToFilterTasks(context: Context) {
+        val typePickerDialog = BaseBottomSheetDialog(context)
+        typePickerDialog.setContentView(R.layout.bs_filter_task)
+        val tvAll: TextView = typePickerDialog.findViewById(R.id.tvAll)!!
+        val tvTodo: TextView = typePickerDialog.findViewById(R.id.tvTodo)!!
+        val tvInProgress: TextView = typePickerDialog.findViewById(R.id.tvInProgress)!!
+        val tvDone: TextView = typePickerDialog.findViewById(R.id.tvDone)!!
+
+        tvAll.setOnClickListener {
+            taskListViewModel.getFilterByTasksStatus(
+                tasksList,
+                getString(R.string.bs_status_type_all)
+            )
+            typePickerDialog.dismiss()
+        }
+        tvTodo.setOnClickListener {
+            taskListViewModel.getFilterByTasksStatus(
+                tasksList,
+                getString(R.string.bs_status_type_todo)
+            )
+            typePickerDialog.dismiss()
+        }
+        tvInProgress.setOnClickListener {
+            taskListViewModel.getFilterByTasksStatus(
+                tasksList,
+                getString(R.string.bs_status_type_in_progress)
+            )
+            typePickerDialog.dismiss()
+        }
+        tvDone.setOnClickListener {
+            taskListViewModel.getFilterByTasksStatus(
+                tasksList,
+                getString(R.string.bs_status_type_done)
+            )
+            typePickerDialog.dismiss()
+        }
+
+        typePickerDialog.show()
+    }
+
 
     private fun goToListDetailScreen(tasksModel: TasksModel) {
         TaskDetailScreen.createIntent(requireContext(), tasksModel).apply {

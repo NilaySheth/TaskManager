@@ -38,9 +38,6 @@ class TaskListScreen : BaseActivity() {
 
     private fun setupUI() {
         setupToolbarMenu()
-        binding.fabCreateTask.setOnClickListener { view ->
-            goToCreateTaskScreen()
-        }
         openTasksFragment()
     }
 
@@ -60,6 +57,7 @@ class TaskListScreen : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.action_add ->  goToCreateTaskScreen()
             R.id.action_logout -> logoutUser()
         }
         return true
