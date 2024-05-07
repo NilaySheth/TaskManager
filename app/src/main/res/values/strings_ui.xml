@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="screen_name_create_task">Create Task</string>
-    <string name="screen_name_task_list">Task List</string>
+    <string name="screen_name_task_list">Task Manager</string>
     <string name="screen_name_login">Login</string>
     <string name="screen_name_edit_task">Edit Task</string>
 
