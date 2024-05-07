@@ -1,6 +1,7 @@
 package com.taskmanager.ui.tasks.auth
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -16,6 +17,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.taskmanager.BuildConfig
 import com.taskmanager.R
 import com.taskmanager.base.BaseActivity
+import com.taskmanager.base.utils.showToast
 import com.taskmanager.data.local.prefs.UserPreferences
 import com.taskmanager.databinding.ActivityLoginBinding
 import com.taskmanager.ui.tasks.list.TaskListActivity
@@ -27,6 +29,15 @@ class LoginScreen : BaseActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+
+    companion object {
+        fun createIntent(
+            context: Context,
+        ): Intent {
+            return Intent(context, LoginScreen::class.java).apply {
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,24 +82,31 @@ class LoginScreen : BaseActivity() {
             if (account != null) {
                 UserPreferences.fullName = account.displayName!!
                 UserPreferences.emailAddress = account.email!!
-                UserPreferences.accessToken = account.idToken.toString()
-                goToTaskListScreen(account)
+                loginToFirebaseAuth(account)
             }
         } else {
             Toast.makeText(this, task.exception.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun goToTaskListScreen(account: GoogleSignInAccount) {
+    private fun loginToFirebaseAuth(account: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
-                val intent = Intent(this, TaskListActivity::class.java)
-                startActivity(intent)
+                val user = auth.currentUser
+                UserPreferences.userId = user!!.uid
+                goToTaskListScreen()
             } else {
-                Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
-
+                showToast(it.exception.toString())
             }
+        }
+    }
+
+    private fun goToTaskListScreen() {
+        TaskListActivity.createIntent(applicationContext).apply {
+            startActivity(this)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            finish()
         }
     }
 

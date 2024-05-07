@@ -8,17 +8,24 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.taskmanager.R
 import com.taskmanager.base.BaseActivity
 import com.taskmanager.base.BaseBottomSheetDialog
+import com.taskmanager.base.mvi.MviView
 import com.taskmanager.base.utils.getTextFromTiet
+import com.taskmanager.base.utils.hide
+import com.taskmanager.base.utils.show
+import com.taskmanager.base.utils.showToast
 import com.taskmanager.base.utils.snack
 import com.taskmanager.databinding.ActivityCreateTaskBinding
 
-class CreateTaskScreen : BaseActivity() {
+class CreateTaskScreen : BaseActivity(),
+    MviView<CreateTaskViewState, CreateTaskSingleViewEvent> {
     private lateinit var binding: ActivityCreateTaskBinding
+    private val createTaskViewModel by viewModels<CreateTaskViewModel>()
 
     companion object {
         fun createIntent(
@@ -33,6 +40,7 @@ class CreateTaskScreen : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        createTaskViewModel.bindMviView(this@CreateTaskScreen, this)
         setupUI()
         handleBackPress()
     }
@@ -40,7 +48,7 @@ class CreateTaskScreen : BaseActivity() {
     private fun setupUI() {
         setupToolbarMenu()
         binding.mcvStatus.setOnClickListener {
-            openBSDialogToAirdropType(this@CreateTaskScreen)
+            openBSToSelectStatus(this@CreateTaskScreen)
         }
     }
 
@@ -48,14 +56,14 @@ class CreateTaskScreen : BaseActivity() {
         if (validateData()) {
             createTask()
         }
-//        Snackbar.make(binding.root, "Replace with your own action", Snackbar.LENGTH_LONG)
-//            .setAction("Action", null)
-//            .setAnchorView(R.id.fab)
-//            .show()
     }
 
     private fun createTask() {
-
+        createTaskViewModel.createTask(
+            binding.tietTitle.getTextFromTiet(),
+            binding.tietDesc.getTextFromTiet(),
+            binding.tvStatus.text.toString()
+        )
     }
 
     private fun validateData(): Boolean {
@@ -85,9 +93,8 @@ class CreateTaskScreen : BaseActivity() {
         binding.tilDesc.error = null
     }
 
-
     @SuppressLint("ClickableViewAccessibility")
-    private fun openBSDialogToAirdropType(context: Context) {
+    private fun openBSToSelectStatus(context: Context) {
         val typePickerDialog = BaseBottomSheetDialog(context)
         typePickerDialog.setContentView(R.layout.bs_select_status)
         val tvTodo: TextView = typePickerDialog.findViewById(R.id.tvTodo)!!
@@ -159,5 +166,25 @@ class CreateTaskScreen : BaseActivity() {
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
             }
         })
+    }
+
+    override fun handleViewState(state: CreateTaskViewState) {
+        if (state.loading) {
+            binding.progressBar.root.show()
+        } else {
+            binding.progressBar.root.hide()
+        }
+    }
+
+    override fun handleSingleViewEvent(event: CreateTaskSingleViewEvent) {
+        when (event) {
+            is CreateTaskSingleViewEvent.TaskCreatedSuccessfully -> {
+                showToast(
+                    getString(R.string.create_task_success),
+                    Snackbar.LENGTH_LONG
+                )
+                this@CreateTaskScreen.onBackPressedDispatcher.onBackPressed()
+            }
+        }
     }
 }

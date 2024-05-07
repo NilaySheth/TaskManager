@@ -1,11 +1,11 @@
 package com.taskmanager.ui.splash
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.taskmanager.R
 import com.taskmanager.base.BaseActivity
-import com.taskmanager.data.local.prefs.UserPreferences
 import com.taskmanager.ui.tasks.auth.LoginScreen
 import com.taskmanager.ui.tasks.list.TaskListActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +21,7 @@ class RoutingActivity : BaseActivity() {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             finish()
         }
-        if (UserPreferences.isUserLoggedIn()) {
+        if (Firebase.auth.currentUser != null) {
             goToTaskListScreen()
         } else {
             goToLoginScreen()
@@ -29,7 +29,7 @@ class RoutingActivity : BaseActivity() {
     }
 
     private fun goToTaskListScreen() {
-        Intent(applicationContext, TaskListActivity::class.java).apply {
+        TaskListActivity.createIntent(applicationContext).apply {
             startActivity(this)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             finish()
@@ -37,7 +37,7 @@ class RoutingActivity : BaseActivity() {
     }
 
     private fun goToLoginScreen() {
-        Intent(applicationContext, LoginScreen::class.java).apply {
+        LoginScreen.createIntent(applicationContext).apply {
             startActivity(this)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             finish()

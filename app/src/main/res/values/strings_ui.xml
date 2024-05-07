@@ -10,6 +10,9 @@
     <string name="create_task_hint_title">Add a title</string>
     <string name="create_task_hint_desc">Add a description</string>
     <string name="create_task_hint_status">Select a status</string>
+    <string name="create_task_success">Kudos! Task created successfully.</string>
+
+    <string name="task_list_menu_create">Logout</string>
 
     <string name="bs_status_type_todo">To Do</string>
     <string name="bs_status_type_in_progress">In Progress</string>

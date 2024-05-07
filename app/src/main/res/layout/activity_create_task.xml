@@ -98,5 +98,7 @@
             app:drawableEndCompat="@drawable/ic_chevron_down" />
     </com.google.android.material.card.MaterialCardView>
 
-
+    <include
+        android:id="@+id/progressBar"
+        layout="@layout/layout_progress_bar"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

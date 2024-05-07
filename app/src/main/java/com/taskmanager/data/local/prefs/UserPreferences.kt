@@ -21,34 +21,24 @@ object UserPreferences {
             }
         }
 
-    var accessToken: String
-        get() = mPrefs.getString(APConstants.USER_ACCESS_TOKEN, "")!!
+    var userId: String
+        get() = mPrefs.getString(APConstants.USER_ACCESS_USER_ID, "")!!
         set(value) {
             mPrefsEditor.apply {
-                putString(APConstants.USER_ACCESS_TOKEN, value)
+                putString(APConstants.USER_ACCESS_USER_ID, value)
                 commit()
             }
         }
 
     var fullName: String
         get() = mPrefs.getString(
-            APConstants.USER_FULLNAME, if (!isUserLoggedIn()) {
-                "Login"
-            } else {
-                "Logged User"
-            }
-        )!!
+            APConstants.USER_FULLNAME, "")!!
         set(value) {
             mPrefsEditor.apply {
                 putString(APConstants.USER_FULLNAME, value)
                 commit()
             }
         }
-
-
-    fun isUserLoggedIn(): Boolean {
-        return accessToken.isNotBlank()
-    }
 
     fun userLogout() {
         mPrefsEditor.clear().apply()

@@ -97,6 +97,7 @@ dependencies {
         exclude module: "play-services-safetynet"
     }
     implementation( libs.play.services.auth)
+    implementation(libs.firebase.firestore)
 
     //MVI architecture
     def orbit_mvi_version = "4.6.1"
